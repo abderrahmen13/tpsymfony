@@ -1,0 +1,133 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <style>
+
+
+    </style>
+</head>
+
+<body>
+    <div class="auction-breadcumps">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ol class="breadcrump">
+                        <li>
+                            <a href="#" class="">
+                                Home
+                            </a>
+                        </li>
+                        <li class="active">
+                            Auto Bidding
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-md-12">
+                    <h1>Auto Bidding</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="high-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 main-content">
+                    <div class="product-auction">
+                        <div class="col-md-12 product-summury">
+                            <div class="row">
+                                <div class="col-md-5 product-thumbnail">
+                                    <div class="product-thumb">
+                                        <a href="">
+                                            <img src="https://ibid.modeltheme.com/wp-content/uploads/2018/09/electronic-cat2.jpg"
+                                                alt="" class="thumbnail-image">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 summury-entry">
+                                    <p class="price">
+                                        Current bid: $155.5
+                                    </p>
+                                    <div class="auction-time">
+                                        Time left:
+                                        <span class="auction-time-row" style="display:none;">2020-12-17</span>
+                                        <div id="deal-countdown" class="countdown"></div>
+                                    </div>
+
+
+                                    <br>
+                                    <div class="inf">
+                                        <p class="auction-end">Auction ends: December 25, 2020 8:19 am <br>
+                                            Timezone: UTC +3 </p>
+                                        <p class="reserve-free">Reserve price has been met</p>
+
+                                        <form class="auction_form cart" method="post" enctype="multipart/form-data"
+                                            data-product_id="4679">
+
+
+                                            <input type="hidden" name="bid" value="4679">
+
+
+                                            <div class="quantity">
+                                                <input type="button" value="+" class="plus">
+                                                <input type="number" name="bid_value" data-auction-id="4679"
+                                                    value="155.5" min="155.5" title="bid"
+                                                    class="input-text qty  bid text left">
+                                                <input type="button" value="-" class="minus">
+                                            </div>
+                                            <button type="submit" data-tooltip="Bid Now"
+                                                class="bid_button button alt"><i class="fa fa-gavel"></i></button>
+
+                                            <input type="hidden" name="place-bid" value="4679">
+                                            <input type="hidden" name="product_id" value="4679">
+
+                                        </form>
+                                    </div>
+
+
+                                    <div class="product_meta">
+
+
+
+                                        <span class="sku_wrapper">SKU: <span class="sku">BF004</span></span>
+
+
+                                        <span class="posted_in">Categories: <a
+                                                href="https://ibid.modeltheme.com/product-category/electronics/"
+                                                rel="tag">Electronics</a>, <a
+                                                href="https://ibid.modeltheme.com/product-category/electronics/televisions/"
+                                                rel="tag">Televisions</a></span>
+                                        <span class="tagged_as">Tags: <a
+                                                href="https://ibid.modeltheme.com/product-tag/black-friday/"
+                                                rel="tag">black friday</a>, <a
+                                                href="https://ibid.modeltheme.com/product-tag/sales/"
+                                                rel="tag">sales</a></span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="./countdown.js"></script>
+</body>
+
+</html>

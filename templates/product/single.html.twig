@@ -1,0 +1,206 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!
+{% endblock %}
+{% block stylesheets %}{% endblock %}
+{% block body %}
+	<div class="auction-breadcumps">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<ol class="breadcrump">
+						<li>
+							<a href="#" class="">
+								Home
+							</a>
+						</li>
+						<li class="active">
+							{{ product.name }}
+						</li>
+					</ol>
+				</div>
+				<div class="col-md-12">
+					<h1>{{ product.name }}</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="high-padding">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 main-content">
+					<div class="product-auction">
+						<div class="col-md-12 product-summury">
+							<div class="row">
+								<div class="col-md-5 product-thumbnail">
+									<div class="product-thumb">
+										<a href="">
+											<img src="{{ vich_uploader_asset(product, 'imageFile') }}" alt="" class="thumbnail-image">
+										</a>
+									</div>
+								</div>
+								<div class="col-md-7 summury-entry">
+									<p class="price">
+										Current bid:
+										{{product.finalPrice}}
+										TND
+									</p>
+									<div class="auction-time">
+										Time left:
+										<span class="auction-time-row" style="display:none;">{{product.endedAt}}</span>
+										<div id="deal-countdown" class="countdown"></div>
+									</div>
+									<div class="inf">
+										<p class="auction-end">Auction ends:
+											{{product.endedAt}}
+										</p>
+										<p class="reserve-free">Reserve price has been met</p>
+
+										{% if app.user and app.user.id != product.user.id %}
+											<!-- THE OWNER CAN'T BE BID TO MINE PRODUCT. -->
+											{{ form_start(form) }}
+											<div class="quantity mb-3">
+												{{ form_label(form.price) }}
+
+												{{ form_widget(form.price) }}
+											</div>
+											<button type="submit" class="bid_button btn btn-primary">
+												<i class="fa fa-gavel"></i>
+											</button>
+											{{ form_end(form) }}
+										{% endif  %}
+									</div>
+									<div class="product_meta">
+
+										<span class="posted_in">Category:
+											<a href="/product/category/{{product.category.id}}">{{ product.category.name }}</a>,
+										</span>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div
+				class="col-md-12 tabs-realated">
+
+				<!-- Pills navs -->
+				<ul class="mygenpills nav nav-pills nav-fill mb-3" id="ex1" role="tablist">
+					<li class="nav-item" role="presentation">
+						<a class="nav-link pills-product active" id="ex2-tab-1" data-mdb-toggle="pill" href="#ex2-pills-1" role="tab" aria-controls="ex2-pills-1" aria-selected="true">Description</a>
+					</li>
+					<li class="nav-item" role="presentation">
+						<a class="nav-link pills-product" id="ex2-tab-2" data-mdb-toggle="pill" href="#ex2-pills-2" role="tab" aria-controls="ex2-pills-2" aria-selected="false">Auction history</a>
+					</li>
+					<li class="nav-item" role="presentation">
+						<a class="nav-link pills-product" id="ex2-tab-3" data-mdb-toggle="pill" href="#ex2-pills-3" role="tab" aria-controls="ex2-pills-3" aria-selected="false">Vendor Info</a>
+					</li>
+					<li class="nav-item" role="presentation">
+						<a class="nav-link pills-product" id="ex2-tab-4" data-mdb-toggle="pill" href="#ex2-pills-4" role="tab" aria-controls="ex2-pills-4" aria-selected="false">Comments</a>
+					</li>
+				</ul>
+				<!-- Pills navs -->
+
+				<!-- Pills content -->
+				<div class="tab-content" id="ex2-content">
+					<div class="tab-pane fade show active" id="ex2-pills-1" role="tabpanel" aria-labelledby="ex2-tab-1">
+						<p>{{product.description}}.</p>
+					</div>
+					<div class="tab-pane fade" id="ex2-pills-2" role="tabpanel" aria-labelledby="ex2-tab-2">
+						<table>
+							<thead>
+								<tr>
+									<th>Date</th>
+									<th>Bid</th>
+									<th>User</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for H in history %}
+									<tr>
+										<td>{{H.bidAt}}</td>
+										<td>
+											<span class="amount">{{H.price}}</span>
+											<span class="mr-1 amount">TND</span>
+										</td>
+										<td>{{H.user.name}}</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+					<div class="tab-pane fade" id="ex2-pills-3" role="tabpanel" aria-labelledby="ex2-tab-3">
+						Tab 3 content
+					</div>
+					<div class="tab-pane fade" id="ex2-pills-4" role="tabpanel" aria-labelledby="ex2-tab-4">
+						<h3 class="mb-4">Comments :
+						</h3>
+						<div
+							class="row" style="margin-right: 0;margin-left: 0">
+							<!-- for comments - Add comments -->
+							{% for C in comments %}
+								<div class="card mb-4" style="width: 100%;border-radius: .5rem;box-shadow: 0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06);border: none;padding: 16px;">
+									<div class="media-left d-flex mb-3">
+
+										<div class="col-11">
+											<img src="{{ vich_uploader_asset(C.user , 'imageFile') }}" class="rounded-circle avatar-author-comment mr-3">
+											<div class="information">
+												<div class="author-comment">{{ C.user.name }}</div>
+												<span class="time-select">
+													{{ C.createdAt }}
+												</span>
+											</div>
+										</div>
+										<div class="col-1">
+											{% if app.user and app.user.id == C.user.id %}
+												<a href="/my/comment/delete/{{C.id}}" class="btn btn-danger delete-comment mr-2">
+													<i class="fa fa-trash"></i>
+												</a>
+											{% endif %}
+										</div>
+									</div>
+
+									<div class="card-body" style="background-color: #f9f9f9; border-radius: 14px;">
+										<p>{{ C.content }}</p>
+									</div>
+								</div>
+							{% endfor %}
+							<!-- encomments-->
+							{% if app.user %}
+							<div class="card mb-4" style="width: 100%;border-radius: .5rem;box-shadow: 0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06);border: none;padding: 16px;">
+								<div class="media-left d-flex mb-3">
+									<img src="{{ vich_uploader_asset(app.user , 'imageFile') }}" class="rounded-circle avatar-author-comment mr-3"></img>
+								<!--<form class="d-flex" style="width: 100%"> -->
+								<div style="width: 100%">
+									{{ form_start(cform) }}
+									<div class="d-flex" style="width: 100%">
+										{{ form_widget(cform.content) }}
+										<button type="submit" class="paper-btn">
+											<i class="fa fa-paper-plane"></i>
+										</button>
+									</div>
+									{{ form_end(cform) }}
+								</div>
+								<!--</form>-->
+							</div>
+							{% endif %}
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Pills content -->
+	</div>
+</div>{% endblock %}{% block javascripts %}
+<script src="{{ asset('js/auction-timer.js') }}"></script>
+<script>
+	$('#ex1 a').on('click', function (e) {
+e.preventDefault()
+$(this).tab('show')
+})
+</script>{% endblock %}

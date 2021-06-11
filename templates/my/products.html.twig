@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <h3>My Products<h3>
+        {% if productLength == 0 %}
+            <span> No Products Found. </span>
+        {% else %}
+            <div class="row">
+                {% for P in products %}
+                <div class="col-3">
+                    <div class="card">
+                        <img src="{{ vich_uploader_asset(P, 'imageFile') }}"></img>
+                        <div class="card-body">
+                            <span>Name : {{ P.name }}</span>
+                            <span>Price : {{ P.finalPrice }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <br>
+        <div class="add_product">
+            <a href="/my/product/add" class="btn btn-primary">Add Product</a>
+        </div>
+        
+    </div>
+
+{% endblock %}

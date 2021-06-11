@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		{% block stylesheets %}{% endblock %}
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}"/>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
+	</head>
+	<body>
+
+		<div class="bt_header">
+			<div class="container">
+				<div class="row">
+					<div class="navbar-header col-md-3 col-sm-12">
+						<h1 class="logo logo-image">
+							<a href="/"><img src="{{ asset('img/logo.png') }}" alt="tunBid"></a>
+						</h1>
+					</div>
+					<div class="first-part col-md-9 col-sm-12">
+						<div class="col-md-8 search-form-product">
+							<div class="ibid-header-searchform">
+								<form name="header-search-form" method="GET" class="woocommerce-product-search menu-search" action="#">
+									<select name="product_cat" id="product_cat" class="form-control1">
+										<option value="">Category</option>
+										<option class="level-0" value="mobile-phones">Mobile Phones</option>
+										<option class="level-0" value="protection-phones">Cases &amp; Protection</option>
+										<option class="level-0" value="power-bank">Power Banks</option>
+										<option class="level-0" value="mobile-phone-chargers">Mobile Chargers</option>
+										<option class="level-0" value="tablets">Tablets</option>
+									</select>
+									<input type="hidden" value="product" name="post_type">
+									<input type="text" name="s" class="search-field" id="keyword" onkeyup="fetch()" maxlength="128" value="" placeholder="Search products...">
+									<button type="submit" class="btn btn-primary">
+										<i class="fa fa-search" aria-hidden="true"></i>
+									</button>
+									<input type="hidden" name="post_type" value="product">
+								</form>
+								<div id="datafetch"></div>
+							</div>
+						</div>
+
+						<div class="col-md-4 menu-products">
+							<a class="shop_cart" href="#">
+								My Bids
+								<i class="fa fa-gavel bids-count"></i>
+							</a>
+
+							<a class="cart-contents" href="#" title="View your shopping cart">0 items -
+								<span class="woocommerce-Price-amount amount">
+									<bdi>
+										0.00<span> TND</span></bdi>
+								</span>
+							</a>
+
+							<!-- Shop Minicart -->
+							<div class="header_mini_cart">
+								<div class="widget woocommerce widget_shopping_cart">
+									<h2 class="widgettitle">Cart</h2>
+									<div class="widget_shopping_cart_content">
+
+										<p class="woocommerce-mini-cart__empty-message">No products in the cart.</p>
+
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+				<div class="container">
+
+					<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+						<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+							<li class="nav-item active">
+								<a class="nav-link" href="/">Home
+									<span class="sr-only">(current)</span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/products/shop">Shop</a>
+							</li>
+						</ul>
+						<div class="my-2 my-lg-0">
+							{% if app.user %}
+								<span class="">
+									<div class="dropdown">
+										<div class="profile-link"><img class="rounded-circle navbar-user-avatar" alt="{{ app.user.username }}" src="{{ vich_uploader_asset(app.user , 'imageFile') }}"></img>
+									</div>
+									<div class="dropdown-content">
+										<a class="contenthref" href="/my/products">My Products</a>
+										<a class="contenthref" href="/logout">Logout</a>
+									</div>
+								</div>
+
+							</span>
+						{% else %}
+							<span class="mr-3">
+								<a class="login-link" href="/login">Login</a>
+							</span>
+							<span class="">
+								<a class="login-link" href="/register">Register</a>
+							</span>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</nav>
+	</div>{% block body %}{% endblock %}{% block javascripts %}{% endblock %}</body></html>

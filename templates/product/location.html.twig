@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<ol class="breadcrump">
+					<li>
+						<a href="/" class="">
+							Home
+						</a>
+					</li>
+					<li class="active">
+						{{ location }}
+					</li>
+				</ol>
+			</div>
+			{% if productLength == 0 %}
+				<div class="col-md-12">
+					<span class="h4">
+						No Products Found In
+						{{ location }}.
+					</span>
+				</div>
+			</div>
+
+		{% else %}
+			<div class="col-md-12">
+				<span class="h4">
+					{{productLength}}
+					Products Found In
+					{{ location }}.
+				</span>
+			</div>
+		</div>
+		<div class="row">
+                {% for P in products %}
+                <div class="col-3">
+                    <div class="card">
+                        <img src="{{ vich_uploader_asset(P, 'imageFile') }}"></img>
+                        <div class="card-body">
+                            <span>Name : {{ P.name }}</span>
+                            <span>Price : {{ P.finalPrice }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+	{% endif %}
+
+</div>{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!
+{% endblock %}
+{% block stylesheets %}{% endblock %}
+{% block body %}
+
+	<div class="container">
+		<h1 class="mb-5">
+			<b style="color: #046fd5">Add</b>
+			Product</h1>
+		<div class="form-add-prod">
+			<div class="mb-4">
+				{{ form_start(form) }}
+				<div class="form-group">
+					{{ form_label(form.name) }}
+					{{ form_widget(form.name) }}
+				</div>
+				<div class="form-group">
+					<label for="initialPrice" class="required">Price</label>
+					{{ form_widget(form.initialPrice) }}
+				</div>
+				<div class="form-group">
+					{{ form_label(form.description) }}
+					{{ form_widget(form.description) }}
+				</div>
+				<div class="form-group">
+					{{ form_label(form.imageFile) }}
+					{{ form_widget(form.imageFile) }}
+				</div>
+				<div class="form-group">
+					{{ form_label(form.days) }}
+					{{ form_widget(form.days) }}
+				</div>
+				{# <div class="form-group">
+					{{ form_label(form.category) }}
+					{{ form_widget(form.category) }}
+				</div> #}
+				{{ form_end(form) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block javascripts %}{% endblock %}
